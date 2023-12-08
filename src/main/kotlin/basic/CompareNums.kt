@@ -1,0 +1,1 @@
+package basicclass CompareNums {    fun solution(num1: Int, num2: Int): Int {        return when (num1 == num2) {            true -> 1            else -> -1        }    }}

@@ -1,0 +1,1 @@
+package basicclass AddNumsIndex {    fun solution(n: Int): Int {        var tempN = n        var answer = 0        while (tempN != 0) {            answer += tempN % 10            tempN /= 10        }        return answer    }}

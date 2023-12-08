@@ -1,0 +1,1 @@
+package basicclass HashadeNum {    fun solution(n: Int): Boolean {        val nStr = n.toString()        var answer = 0        for (c in nStr) {            answer += c.digitToInt()        }        return n % answer == 0    }}

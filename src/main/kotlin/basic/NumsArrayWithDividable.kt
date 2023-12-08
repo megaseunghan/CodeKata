@@ -1,0 +1,1 @@
+package basicclass NumsArrayWithDividable {    fun solution(arr: IntArray, divisor: Int): IntArray {        var newArr = arr.filter { it % divisor == 0 }            .toIntArray()            .sortedArray()        return if (newArr.isEmpty()) IntArray(1) { -1 } else newArr    }}
