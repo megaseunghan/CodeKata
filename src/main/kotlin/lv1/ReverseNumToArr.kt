@@ -1,0 +1,1 @@
+package lv1class ReverseNumToArr {    fun solution(n: Long): IntArray {        val arr = mutableListOf<Int>()        val reversed = n.toString().reversed()            .toCharArray()        reversed.forEach {            arr += it.digitToInt()        }        return arr.toIntArray()    }}

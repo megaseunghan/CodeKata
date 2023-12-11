@@ -1,0 +1,1 @@
+package lv2class StringDesc {    fun solution(s: String) = String(s.toCharArray().sortedArrayDescending())}

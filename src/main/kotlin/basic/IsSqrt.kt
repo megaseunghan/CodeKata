@@ -1,1 +1,0 @@
-package basicimport kotlin.math.powclass IsSqrt {    fun solution(n: Long): Long {        val x = Math.floor(Math.sqrt(n.toDouble()))        return if (x.pow(2).toLong() == n) (x + 1).pow(2).toLong() else -1    }}

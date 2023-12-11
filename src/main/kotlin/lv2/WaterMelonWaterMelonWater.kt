@@ -1,0 +1,1 @@
+package lv2class WaterMelonWaterMelonWater {    fun solution(n: Int): String {        var odd = "수"        var even = "수박"        var answer: StringBuilder = StringBuilder()        for(i in 1 .. n / 2) {            answer.append(even)        }        if (n % 2 == 1) answer.append(odd)        return answer.toString()    }}

@@ -1,0 +1,1 @@
+package lv2class DotProduct {    fun solution(a: IntArray, b: IntArray) = a.mapIndexed() { index, i -> i * b[index] }.sum()}

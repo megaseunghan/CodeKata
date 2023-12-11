@@ -1,0 +1,1 @@
+package lv1class BringMiddleChar {    fun solution(s: String): String {        var answer = ""        if (s.length % 2 == 1) {            answer = s[s.length / 2].toString()        } else {            answer += s[s.length / 2 - 1].toString()            answer += s[s.length / 2].toString()        }        return answer    }}

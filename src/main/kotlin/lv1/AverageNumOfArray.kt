@@ -1,0 +1,1 @@
+package lv1class AverageNumOfArray {    fun solution(numbers: IntArray): Double {        return numbers.average()    }}

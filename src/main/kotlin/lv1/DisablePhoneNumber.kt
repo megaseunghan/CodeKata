@@ -1,0 +1,1 @@
+package lv1class DisablePhoneNumber {    fun solution(phone_number: String): String {        var limit = phone_number.length - 4        var answer = ""        phone_number.forEachIndexed { index, c ->            when (limit <= index) {                true -> answer += c                false -> answer += "*"            }        }        return answer    }}

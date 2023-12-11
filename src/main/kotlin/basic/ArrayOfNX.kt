@@ -1,1 +1,0 @@
-package basicclass ArrayOfNX {    fun solution(x: Int, n: Int): LongArray {        var xLong = x.toLong()        var arr = longArrayOf()        for (i in 1..n) {            arr += (i * xLong)        }        return arr    }}
