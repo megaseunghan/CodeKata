@@ -1,0 +1,1 @@
+package lv2class BasicString {    fun solution(s: String) = s.all { it.isDigit() }.and(s.length == 4 || s.length == 6)}
