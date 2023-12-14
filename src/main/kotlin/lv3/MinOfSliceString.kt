@@ -1,0 +1,1 @@
+package lv3class MinOfSliceString {    fun solution(t: String, p: String): Int {        var answer: Int = 0        var limit = t.length - p.length        var sliced = ""        for (i in 0..limit) {            sliced = t.slice(i until i + p.length)            if (sliced.toLong() <= p.toLong()) answer++        }        return answer    }}
