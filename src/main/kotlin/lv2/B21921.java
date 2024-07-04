@@ -1,7 +1,5 @@
 package lv2;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -12,18 +10,19 @@ public class B21921 {
         Scanner sc = new Scanner(System.in);
         StringTokenizer st = new StringTokenizer(sc.nextLine(), " ");
 
-        int n = Integer.parseInt(st.nextToken());
-        int x = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken()); // 몇 일 동안 운영했는지
+        int x = Integer.parseInt(st.nextToken()); // 기간
 
         visitors = new int[n];
 
         st = new StringTokenizer(sc.nextLine(), " ");
+
         for (int i = 0; i < visitors.length; i++) {
             visitors[i] = Integer.parseInt(st.nextToken());
         }
 
         int sum = 0;
-        for (int i = 0; i < visitors.length; i++) {
+        for (int i = 0; i < x; i++) {
             sum += visitors[i];
         }
 
