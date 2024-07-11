@@ -1,35 +1,42 @@
 package lv2;
 
+import java.util.PriorityQueue;
+
 public class P155651 {
+    class Point {
+        int x;
+        int y;
+
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     public int solution(String[][] book_time) {
-        int answer = 0;
-        int maxTime = 24 * 60 + 10; // 1450
-        int cleanTime = 10;
-
-        int[] rooms = new int[maxTime];
+        // 시작 시간이 같으면 입실인 것부터, 시작 시간이 일찍인 것부터.
+        PriorityQueue<Point> pq = new PriorityQueue<>(((o1, o2) -> o1.x == o2.x ? o1.y - o2.y : o1.x - o2.x));
 
         for (String[] time : book_time) {
-            String in = time[0];
-            String out = time[1];
-
-            rooms[calTime(in)] += 1;
-            rooms[calTime(out) + cleanTime] += -1;
+            pq.add(new Point(toMin(time[0]), 1));
+            pq.add(new Point(toMin(time[1]) + 10, -1));
         }
 
-        // 누적합
-        for (int i = 1; i < maxTime; i++) {
-            rooms[i] += rooms[i - 1];
-            answer = Math.max(answer, rooms[i]);
+        int answer = 0, count = 0;
+
+        while (!pq.isEmpty()) {
+            Point point = pq.poll();
+            count += point.y;
+            answer = Math.max(answer, count);
         }
 
         return answer;
     }
 
-    private static int calTime(String time) {
-        String[] split = time.split(":");
-        String hour = split[0];
-        String minute = split[1];
-        return ((Integer.parseInt(hour) * 60) + Integer.parseInt(minute));
+    public int toMin(String time) {
+        String[] hm = time.split(":");
+        return (Integer.parseInt((hm[0])) * 60) + Integer.parseInt(hm[1]);
     }
 }
+
+
