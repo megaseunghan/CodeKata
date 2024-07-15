@@ -18,14 +18,13 @@ public class P169199 {
     }
 
     int[][] D = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+    int[][] map;
+
     Pointer start;
     Pointer goal;
 
-    int[][] map;
-    boolean[][] visited;
-
     public int solution(String[] board) {
-        map = new int[board.length][board[0].split("").length];
+        map = new int[board.length][board[0].length()];
 
         for (int i = 0; i < board.length; i++) {
 
@@ -35,66 +34,53 @@ public class P169199 {
 
                 String s = split[j];
 
-                if (s.equals("D")) {
-                    map[i][j] = -1;
-                    continue;
-                }
-
-                if (s.equals("G")) {
-                    goal = new Pointer(i, j);
-                } else if (s.equals("R")) {
-                    start = new Pointer(i, j);
-                }
+                if (s.equals("G")) goal = new Pointer(i, j);
+                if (s.equals("R")) start = new Pointer(i, j);
+                if (s.equals("D")) map[i][j] = -1;
+                else map[i][j] = Integer.MAX_VALUE;
             }
         }
 
+        BFS(start.x, start.y);
+        if (map[goal.x][goal.y] == Integer.MAX_VALUE) return -1;
 
-        int answer = BFS(start.x, start.y);
-
-        return answer;
+        return map[goal.x][goal.y];
     }
 
-    int BFS(int x, int y) {
-        int count = 0;
-        Queue<Pointer> queue = new LinkedList<>();
-        queue.offer(new Pointer(x, y));
+    void BFS(int x, int y) {
+        map[x][y] = 0;
 
-        while (!queue.isEmpty()) {
+        Queue<Pointer> q = new LinkedList<>();
+        q.add(new Pointer(x, y));
 
-            Pointer cur = queue.poll();
+        while(!q.isEmpty()) {
+            Pointer now = q.poll();
+            int curX = now.x;
+            int curY = now.y;
 
             for (int i = 0; i < 4; i++) {
-                count = map[cur.x][cur.y];
+                int nX = curX + D[i][0];
+                int nY = curY + D[i][1];
 
-                int newX = cur.x;
-                int newY = cur.y;
-
-
-                while (true) {
-                    newX += D[i][0];
-                    newY += D[i][1];
-
-                    if ((newX < 0 || newX >= map.length || newY < 0 || newY >= map[0].length) || (map[newX][newY] == -1)) {
-                        break;
-                    }
+                while(validation(nX, nY) && map[nX][nY] != -1) {
+                    nX += D[i][0];
+                    nY += D[i][1];
                 }
+                nX -= D[i][0];
+                nY -= D[i][1];
 
-                newX -= D[i][0];
-                newY -= D[i][1];
+                if (nX == curX && nY == curY) continue;
+                if (map[nX][nY] <= map[curX][curY] + 1) continue;
 
-                if (map[newX][newY] != 0) {
-                    continue;
-                }
-
-                queue.offer(new Pointer(newX, newY));
-                map[newX][newY] = count + 1;
-
-                if (newX == goal.x && newY == goal.y) {
-                    return count;
-                }
+                map[nX][nY] = map[curX][curY] + 1;
+                q.add(new Pointer(nX, nY));
             }
         }
-        return -1;
+    }
+
+    public boolean validation(int nx, int ny){
+        if (0 <= nx && 0 <= ny && nx < map.length && ny < map[0].length) return true;
+        return false;
     }
 
     public static void main(String[] args) {
